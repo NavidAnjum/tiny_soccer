@@ -1,0 +1,180 @@
+#homeCarousel{
+	height: 100vh;
+}
+
+#homeCarousel .carousel-inner{
+	width: 100%;
+	height: 100%;
+}
+#homeCarousel .carousel-inner .carousel-item{
+	width: 100%;
+	height: 100%;
+}
+#homeCarousel .carousel-inner .carousel-item img{
+	max-height: 100%;
+}
+
+
+
+table.v-middle tr td{
+	vertical-align: middle;
+}
+
+
+/*multi-step form style*/
+/* your CSS goes here*/
+.vanue-register {
+    background: #eee
+}
+
+.vanue-register #regForm {
+    background-color: #ffffff;
+    margin: 0px auto;
+    font-family: Raleway;
+    padding: 40px;
+    border-radius: 10px
+}
+
+.vanue-register  h1 {
+    text-align: center
+}
+
+.vanue-register input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa
+}
+
+.vanue-register input.invalid {
+    background-color: #ffdddd
+}
+
+.vanue-register .tab {
+    display: none
+}
+
+.vanue-register button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer
+}
+
+.vanue-register button:hover {
+    opacity: 0.8
+}
+
+.vanue-register #prevBtn {
+    background-color: #bbbbbb
+}
+
+.vanue-register .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5
+}
+
+.vanue-register .step.active {
+    opacity: 1
+}
+
+.vanue-register .step.finish {
+    background-color: #4CAF50
+}
+
+.vanue-register .all-steps {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.vanue-register .thanks-message {
+    display: none
+}
+
+.vanue-register .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default radio button */
+
+.vanue-register .container input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* Create a custom radio button */
+
+.vanue-register .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.vanue-register .container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+
+/* When the radio button is checked, add a blue background */
+
+.vanue-register .container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.vanue-register .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the indicator (dot/circle) when checked */
+
+.vanue-register .container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the indicator (dot/circle) */
+
+.vanue-register .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //Frontent Controllers
 use App\Http\Controllers\Frontend\AppHomeController;
+use App\Http\Controllers\Frontend\PagesController;
 
 //Auth Controllers
 use App\Http\Controllers\HomeController;
@@ -28,6 +29,10 @@ Define Routes
 
 //Frontend Routes
 Route::get('/', [AppHomeController::class, "index"])->name("app.home");
+Route::get('/venues', [PagesController::class, "venues"])->name("page.venues");
+Route::get('/venues/{vanueId}', [PagesController::class, "single_venue"])->name("page.single.vanue");
+Route::get('/venues/register', [PagesController::class, "register_value"])->name("page.register.vanue");
+
 
 //Auth Routes
 Auth::routes();
