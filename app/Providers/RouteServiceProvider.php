@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = "/home";
+    public const ADMIN_DASHBOARD = "/admin/dashboard";
+    public const COACH_DASHBOARD = "/coach/dashboard";
+    public const PARENT_DASHBOARD = "/parent/dashboard";
+
+
 
     /**
      * The controller namespace for the application.
