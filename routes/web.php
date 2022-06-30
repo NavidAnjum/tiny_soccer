@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\AppHomeController;
 use App\Http\Controllers\Frontend\PagesController;
 
+
 //Auth Controllers
 use App\Http\Controllers\HomeController;
 
@@ -41,6 +42,11 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Admin Protected Routes
 Route::group(["prefix"=>"admin", "as"=>"admin.", "middleware"=>["auth", "adminMW"]], function(){
     Route::get("dashboard", [AdminDashboardController::class, "index"])->name("dashboard");
+  //  Route::get("add_venues", [PagesController::class, "venues"])->name("add_venues");
+
+    //Just for testing route
+    Route::get("additional", [AdminDashboardController::class, "additional"])->name("additional");
+
 });
 
 
@@ -52,10 +58,4 @@ Route::group(["prefix"=>"coach", "as"=>"coach.", "middleware"=>["auth", "coachMW
 //Parent Protected Routes
 Route::group(["prefix"=>"parent", "as"=>"parent.", "middleware"=>["auth", "parentMW"]], function(){
     Route::get("dashboard", [ParentDashboardController::class, "index"])->name("dashboard");
-    Route::get("diddikicker_add", [ParentDashboardController::class, "diddikicker_add"])->name("diddikicker_add");
-
-
-    //Just for test
-    Route::get("additional", [ParentDashboardController::class, "additional"])->name("additional");
-
-});
+ });
