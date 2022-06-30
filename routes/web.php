@@ -52,4 +52,10 @@ Route::group(["prefix"=>"coach", "as"=>"coach.", "middleware"=>["auth", "coachMW
 //Parent Protected Routes
 Route::group(["prefix"=>"parent", "as"=>"parent.", "middleware"=>["auth", "parentMW"]], function(){
     Route::get("dashboard", [ParentDashboardController::class, "index"])->name("dashboard");
+    Route::get("diddikicker_add", [ParentDashboardController::class, "diddikicker_add"])->name("diddikicker_add");
+
+
+    //Just for test
+    Route::get("additional", [ParentDashboardController::class, "additional"])->name("additional");
+
 });
