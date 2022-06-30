@@ -9,6 +9,7 @@
 
 			<div class="container-fluid">
                 <div class="row">
+{{--  "Seperated Dashboard's main body.Will use dashboard as Master Template"--}}
                     @yield('main_content')
 			   </div>
             </div>
