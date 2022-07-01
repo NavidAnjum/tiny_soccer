@@ -43,7 +43,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Admin Protected Routes
 Route::group(["prefix"=>"admin", "as"=>"admin.", "middleware"=>["auth", "adminMW"]], function(){
     Route::get("dashboard", [AdminDashboardController::class, "index"])->name("dashboard");
-    Route::resource("diddikickers", DiddikickerController::class);
+   Route::resource("diddikickers", DiddikickerController::class);
+
 });
 
 

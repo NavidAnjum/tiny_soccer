@@ -15,7 +15,7 @@ class CreateChildrensTable extends Migration
     {
         Schema::create('childrens', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('parent_profile_id')->unsigned()->unique();
+            $table->bigInteger('parent_profile_id')->unsigned();
             $table->foreign('parent_profile_id')->references('id')->on('parent_profiles')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

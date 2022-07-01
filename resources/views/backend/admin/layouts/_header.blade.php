@@ -13,6 +13,7 @@
 	<meta property="og:description" content="MotaAdmin - Bootstrap Admin Dashboard" />
 	<meta property="og:image" content="https://motaadmin.dexignlab.com/xhtml/social-image.png" />
 	<meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
 	<!-- PAGE TITLE HERE -->
 	<title>Admin Dashboard</title>

@@ -15,7 +15,7 @@ class CreateParentProfilesTable extends Migration
     {
         Schema::create('parent_profiles', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->unique();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -26,7 +26,7 @@ class CreateParentProfilesTable extends Migration
             $table->string('facebook_name',50);
             $table->string('enquired',50);
             $table->date('date_enquired');
-            $table->string('heard_about_us',10);
+            $table->string('heard_about_us',50);
             $table->string('direct_debit_day',50);
             $table->text('notes',200);
             $table->timestamps();

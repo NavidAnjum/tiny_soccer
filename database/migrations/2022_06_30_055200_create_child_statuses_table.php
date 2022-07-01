@@ -15,7 +15,7 @@ class CreateChildStatusesTable extends Migration
     {
         Schema::create('child_statuses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('children_id')->unsigned()->unique();
+            $table->bigInteger('children_id')->unsigned();
             $table->string('venue','100');
             $table->enum('class',['Dids', 'Mids','Bigs']);
             $table->enum('status',['Waiting', 'Active','Disabled']);

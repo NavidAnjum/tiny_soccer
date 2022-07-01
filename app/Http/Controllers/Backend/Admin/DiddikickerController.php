@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Admin\DiddikickerStoreRequest;
+use App\Models\Children;
+use App\Models\ChildStatus;
+use App\Models\ParentProfile;
 use Illuminate\Http\Request;
 use App\Helpers\HelperService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DiddikickerController extends Controller
 {
@@ -34,9 +41,68 @@ class DiddikickerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiddikickerStoreRequest $request)
     {
-        //
+        //validating all request
+        $validated = $request->validated();
+        $user_id=   Auth::id();
+
+        $data=json_decode($request->getContent(),true);
+        try{
+            DB::beginTransaction();
+            // Create ParentProfile
+
+            $user = ParentProfile::create([
+                'user_id' => $user_id,
+                'first_name' => $data['parents_first_name'],
+                'last_name' => $data['parents_last_name'],
+                'telephone' => $data['telephone'],
+                'address' => $data['address'],
+                'facebook_name' => $data['facebook_name'],
+                'enquired' => $data['how_enquired'],
+                'date_enquired' => $data['date_enquired'],
+                'heard_about_us' => $data['heard_about_us'],
+                'direct_debit_day' => $data['direct_debit_day'],
+                'notes' => $data['note']
+
+            ]);
+            $parent_id=ParentProfile::max('id');
+
+            // Create ParentProfile
+
+            $user = Children::create([
+                'parent_profile_id' => $parent_id,
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'date_of_birth' => $data['date_of_birth'],
+                'allergies' => $data['allergies']
+
+            ]);
+
+            // Create ChildStatus
+            $child_id=Children::max('id');
+
+            $user = ChildStatus::create([
+                'children_id' => $child_id,
+                'venue' => $data['venue'],
+                'class' => $data['class_name'],
+                'status' => $data['status']
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => 'Saved Successfully'
+            ]);
+        }
+        catch(Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+
+
+
+
     }
 
     /**

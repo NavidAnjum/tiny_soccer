@@ -19,5 +19,17 @@
             "Dids"=>"Dids ",
             "Mids"=>"Mids",
             "Bigs"=>"Bigs"
+        ],
+        "ENQUIRED"=>[
+            "Email"=>"Email",
+            "Phone"=>"Phone",
+            "Facebook"=>"Facebook"
+        ],
+        'HARED'=>[
+            "Banner"=>"Banner",
+            "classforkids"=>"classforkids",
+            "car"=>"car",
+
         ]
+
 	];

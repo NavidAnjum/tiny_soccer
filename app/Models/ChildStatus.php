@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ChildStatus extends Model
 {
     use HasFactory;
+    protected $fillable=['children_id','venue','class','status'];
+
+    public function childs()
+    {
+        return $this->belongsTo(Children::class);
+    }
 }
