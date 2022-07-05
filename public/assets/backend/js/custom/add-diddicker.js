@@ -21,7 +21,6 @@ function add_diddikicker() {
     if( first_name && last_name && parents_first_name && parents_last_name && date_of_birth && telephone && email &&
         address && venue && class_name && facebook_name && allergies && first_name && status &&
         how_enquired && date_enquired && heard_about_us && direct_debit_day && note ) {
-        alert(first_name)
             const res=fetch('/admin/diddikickers', {
                 method: 'POST',
                 headers : {
@@ -54,7 +53,6 @@ function add_diddikicker() {
                 .then(response=>{
                         let new_response = response.json()
                              new_response.then((value => {
-                            console.log(value)
                                  if(value.success){
                                      alert(value.success)
 

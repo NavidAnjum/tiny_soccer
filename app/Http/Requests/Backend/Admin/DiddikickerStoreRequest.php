@@ -43,7 +43,7 @@ class DiddikickerStoreRequest extends FormRequest
             'status' => 'required|max:50',
             'how_enquired' => 'required|max:50',
             'date_enquired' => 'required|max:50',
-            'heard_about_us' => 'required|max:10',
+            'heard_about_us' => 'required|max:50',
             'direct_debit_day' => 'required|max:50',
             'note' => 'required|max:1000'
         ];

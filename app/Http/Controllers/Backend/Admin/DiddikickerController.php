@@ -22,7 +22,14 @@ class DiddikickerController extends Controller
      */
     public function index()
     {
-        return view(HelperService::getView("diddikickers.index"));
+        $childs= DB::table('users')
+           ->join('parent_profiles','users.id','=','parent_profiles.user_id')
+            ->join('childrens', 'parent_profiles.id', '=', 'childrens.parent_profile_id')
+            ->join('child_statuses', 'childrens.id', '=', 'child_statuses.children_id')
+            ->select('users.email','parent_profiles.*','child_statuses.*','childrens.*')
+            ->get();
+
+        return view(HelperService::getView("diddikickers.index"))->with(['childs'=>$childs]);
     }
 
     /**
@@ -52,48 +59,77 @@ class DiddikickerController extends Controller
             DB::beginTransaction();
             // Create ParentProfile
 
-            $user = ParentProfile::create([
-                'user_id' => $user_id,
-                'first_name' => $data['parents_first_name'],
-                'last_name' => $data['parents_last_name'],
-                'telephone' => $data['telephone'],
-                'address' => $data['address'],
-                'facebook_name' => $data['facebook_name'],
-                'enquired' => $data['how_enquired'],
-                'date_enquired' => $data['date_enquired'],
-                'heard_about_us' => $data['heard_about_us'],
-                'direct_debit_day' => $data['direct_debit_day'],
-                'notes' => $data['note']
+           // duplicate check
+            $parent_duplicate_check=ParentProfile::orderby('created_at')->where('user_id', Auth::id())->value('id');
 
-            ]);
-            $parent_id=ParentProfile::max('id');
+            //duplicate check
+               if($parent_duplicate_check==null || $parent_duplicate_check=='undefined'){
+
+                $user = ParentProfile::create([
+                    'user_id' => $user_id,
+                    'first_name' => $data['parents_first_name'],
+                    'last_name' => $data['parents_last_name'],
+                    'telephone' => $data['telephone'],
+                    'address' => $data['address'],
+                    'facebook_name' => $data['facebook_name'],
+                    'enquired' => $data['how_enquired'],
+                    'date_enquired' => $data['date_enquired'],
+                    'heard_about_us' => $data['heard_about_us'],
+                    'direct_debit_day' => $data['direct_debit_day'],
+                    'notes' => $data['note']
+
+                ]);
+
+                   $parent_id=ParentProfile::max('id');
+
+               }else{
+                   $parent_id= $parent_duplicate_check;
+               }
+
+
 
             // Create ParentProfile
+//          //duplicate check
+                $children_duplicate_check=Children::orderby('created_at')
+                    ->where('parent_profile_id', $parent_duplicate_check)
+                    ->where('first_name', $data['first_name'])
+                    ->where('last_name', $data['last_name'])
+                    ->where('date_of_birth', $data['date_of_birth'])
+                    ->value('id');
 
-            $user = Children::create([
-                'parent_profile_id' => $parent_id,
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'date_of_birth' => $data['date_of_birth'],
-                'allergies' => $data['allergies']
 
-            ]);
+               if($children_duplicate_check==null || $children_duplicate_check=='undefined') {
 
-            // Create ChildStatus
-            $child_id=Children::max('id');
+                   $user = Children::create([
+                       'parent_profile_id' => $parent_id,
+                       'first_name' => $data['first_name'],
+                       'last_name' => $data['last_name'],
+                       'date_of_birth' => $data['date_of_birth'],
+                       'allergies' => $data['allergies']
 
-            $user = ChildStatus::create([
-                'children_id' => $child_id,
-                'venue' => $data['venue'],
-                'class' => $data['class_name'],
-                'status' => $data['status']
-            ]);
+                   ]);
+                   $child_id = Children::max('id');
 
-            DB::commit();
+
+                   // Create ChildStatus
+
+                   $user = ChildStatus::create([
+                       'children_id' => $child_id,
+                       'venue' => $data['venue'],
+                       'class' => $data['class_name'],
+                       'status' => $data['status']
+                   ]);
+
+                   DB::commit();
+
+               }
+
 
             return response()->json([
                 'success' => 'Saved Successfully'
             ]);
+
+
         }
         catch(Exception $e){
             DB::rollback();
@@ -113,6 +149,7 @@ class DiddikickerController extends Controller
      */
     public function show($id)
     {
+
         return view(HelperService::getView("diddikickers.show"));
     }
 
@@ -124,6 +161,9 @@ class DiddikickerController extends Controller
      */
     public function edit($id)
     {
+//        $data['permissions'] = Permission::where('role_id', $id)->joinSub($page,'permissions_page',function($join){
+//            $join->on('permissions.page_id','=','permissions_page.page_id');
+//        })->get();
         return view(HelperService::getView("diddikickers.edit"));
     }
 

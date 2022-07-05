@@ -15,6 +15,6 @@ class Children extends Model
         return $this->belongsTo(ParentProfile::class);
     }
     public function childstatuses(){
-        return $this->hasMany(ChildStatus::class);
+        return $this->hasOne(ChildStatus::class);
     }
 }

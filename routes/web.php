@@ -35,7 +35,6 @@ Route::get('/venues', [PagesController::class, "venues"])->name("page.venues");
 Route::get('/venues/{vanueId}', [PagesController::class, "single_venue"])->name("page.single.vanue");
 Route::get('/venues/register', [PagesController::class, "register_value"])->name("page.register.vanue");
 
-
 //Auth Routes
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
